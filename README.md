@@ -1,32 +1,27 @@
 # CalmBot - AI-Powered Mental Health Companion
 
-## Table of Contents
-- [Introduction](#introduction)  
-- [Benefits](#benefits)  
-- [Demo](#demo)  
-- [Installation](#installation)  
-- [Usage](#usage)  
-- [Project Structure](#project-structure)  
-- [Technologies Used](#technologies-used)  
-- [Contributing](#contributing)  
-- [License](#license)  
-- [Acknowledgements](#acknowledgements)  
-- [Contact](#contact)  
-
----
-
 ## Introduction
-CalmBot is an innovative AI-powered mental health companion designed to provide empathetic, 24/7 support for users navigating their emotional well-being. Built for Hackathon 2025, CalmBot offers a web-based interface with a soothing, user-friendly design, enabling users to express emotions through interactive buttons (Happy, Sad, Angry, Anxious) or engage in freeform conversation.
 
-CalmBot also has a dedicated website designed for easy integration into popular social media and messaging platforms such as WhatsApp, Instagram, Facebook Messenger, Twitter, and Discord. This multi-platform approach ensures users can access mental health support wherever they feel most comfortable, making help more accessible and reducing barriers caused by stigma or technical limitations.
+CalmBot is an innovative AI-powered mental health companion designed to provide empathetic, 24/7 support for users navigating their emotional well-being. It offers two main ways for users to connect:
 
-Right now, CalmBot is live on Telegram as @calm56bot, providing immediate, anonymous support through a conversational interface.
+- **Website:** CalmBot has a dedicated web-based interface featuring a soothing, user-friendly design. Through the website, users can express emotions by clicking interactive mood buttons (Happy, Sad, Angry, Anxious) or engage in freeform conversation. The website experience is ideal for users who prefer a focused and distraction-free environment for mental health support.
 
-The project features a unique learning system that adapts to unknown inputs, enhancing personalization over time. CalmBot maintains user privacy and anonymity while offering continuous improvement. Technically, it leverages a Flask backend, a responsive Tailwind CSS frontend, and a SQLite database to deliver heartfelt, tailored responses to users’ emotional states.
+- **Bot:** Recognizing that most people spend more time on social media and messaging platforms than visiting websites, CalmBot is also available as a conversational bot. This bot runs on platforms like Telegram (currently live as [@calm56bot](https://t.me/calm56bot)) and can be extended to WhatsApp, Instagram, Facebook Messenger, Twitter, Discord, and more. The bot format allows easy access for users seeking quick, anonymous emotional support right where they already communicate daily.
+
+### Why both a website and a bot?
+
+- **Website:** Provides a rich, immersive interface tailored to mental wellness, with calming visuals, smooth animations, and detailed responses to help users deeply reflect on their feelings.
+  
+- **Bot:** Offers instant, convenient access on popular social platforms where users already spend time, lowering the barrier to seeking help and increasing reach and engagement.
+
+CalmBot’s AI model is flexible and powers both the website and the bot, delivering heartfelt, empathetic responses. It adapts continuously through a unique learning feature that handles unknown inputs, ensuring personalized, evolving support while maintaining user privacy and anonymity.
+
+Under the hood, CalmBot is built with a Flask backend, a responsive Tailwind CSS frontend for the website, and a SQLite database to log interactions securely.
 
 ---
 
 ## Benefits
+
 - **Interactive Mood Buttons:** Choose from Happy, Sad, Angry, or Anxious to receive detailed, five-paragraph responses filled with encouragement and coping strategies.  
 - **Conversational Chat:** Engage in dynamic dialogue with responses from a 1,000-entry dataset, featuring an animated chat box that appears seamlessly.  
 - **Adaptive Learning:** Logs unknown inputs to `unknown_inputs.json` and confirms learning, enhancing personalization.  
@@ -37,49 +32,45 @@ The project features a unique learning system that adapts to unknown inputs, enh
 ---
 
 ## Demo
+
 Explore CalmBot in our 3-minute demo video:  
-[CalmBot Demo Video](#) *(Replace with your video link)*
+*CalmBot Demo Video (Replace with your video link)*  
 
 ### Screenshots:
+
 #### Mood Selection  
-*(Add screenshot here)*
+*(Add screenshots to a `screenshots` folder in your repo)*  
 
 #### Chat Interface  
-*(Add screenshot here)*
-
-*(Add screenshots to a `screenshots` folder in your repo)*
 
 ---
 
 ## Installation
 
 ### Prerequisites
+
 - Python 3.10+  
 - pip  
 - Git
 
-## Steps
-# Clone the Repository
+### Steps
+
 ```bash
+# Clone the Repository
 git clone https://github.com/yourusername/calmbot.git
 cd calmbot
-````
 
 # Install Dependencies
-
-```bash
 pip install flask
-```
 
 # Verify Dataset
-
-Ensure `model_log.json` exists with 1,000 response pairs. If missing, regenerate:
-
-```bash
+# Ensure model_log.json exists with 1,000 response pairs. If missing, regenerate:
 python generate_log.py
-```
+````
 
-# Set Up Structure
+---
+
+## Set Up Structure
 
 Confirm these files and folders exist:
 
@@ -90,7 +81,6 @@ Confirm these files and folders exist:
 * `mood_tracker.db`
 * `generate_log.py`
 
-```
 ---
 
 ## Troubleshooting
@@ -100,6 +90,7 @@ Confirm these files and folders exist:
   ```bash
   python generate_log.py
   ```
+
 * **Flask Errors: Check version**
 
   ```bash
@@ -131,8 +122,6 @@ Open [http://localhost:5000](http://localhost:5000) in your browser.
 
 ## Monitor Logs
 
-Run these commands in your terminal:
-
 ```bash
 # View interactions
 sqlite3 mood_tracker.db "SELECT * FROM responses LIMIT 5;"
@@ -162,23 +151,23 @@ calmbot/
 
 ## Technologies Used
 
-### Frontend
+**Frontend:**
 
 * HTML5
 * Tailwind CSS (CDN)
 * JavaScript (ES6)
 * Poppins Font (Google Fonts)
 
-### Backend
+**Backend:**
 
 * Flask (Python)
 * SQLite
 
-### Data
+**Data:**
 
 * JSON (`model_log.json`, `unknown_inputs.json`)
 
-### Environment
+**Environment:**
 
 * Python 3.10
 * Windows PowerShell
@@ -190,17 +179,13 @@ calmbot/
 We welcome contributions to make CalmBot even better!
 
 * **Fork the Repository:** Click “Fork” on GitHub.
-
 * **Create a Branch:**
 
   ```bash
   git checkout -b feature/your-feature
   ```
-
 * **Make Changes:** Update code, ensuring compatibility.
-
 * **Test Locally:** Run `python server.py` and test at [http://localhost:5000](http://localhost:5000).
-
 * **Submit a Pull Request:** Push changes and open a PR with a detailed description.
 
 ### Guidelines
@@ -214,14 +199,13 @@ We welcome contributions to make CalmBot even better!
 ## License
 
 MIT License
-See [LICENSE](LICENSE) file for details.
+See LICENSE file for details.
 
 ---
 
 ## Acknowledgements
 
 * Hackathon 2025, organized by DeepFunding Developer Outright Circle: For inspiring this project.
-* xAI: For Grok 3, guiding development.
 * Mental Health Community: For highlighting accessible support needs.
 * Tailwind CSS & Poppins: For a beautiful UI.
 
@@ -231,8 +215,6 @@ See [LICENSE](LICENSE) file for details.
 
 For inquiries or collaboration:
 
-* **Email:** [your.email@example.com](mailto:your.email@example.com)
-* **GitHub:** [yourusername](https://github.com/yourusername)
-* **Support:** [support@calmbot.com](mailto:support@calmbot.com)
-
-Created with empathy for Hackathon 2025 by \[Your Name].
+* **Email:** 
+* **GitHub:** 
+* **Support:** 
