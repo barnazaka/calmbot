@@ -1,10 +1,6 @@
-Absolutely! Here's your complete **CalmBot** README.md content, fully formatted with all the sections you provided, ready to copy and paste into your GitHub repo:
-
-````markdown
 # CalmBot - AI-Powered Mental Health Companion
 
 ## Table of Contents
-
 - [Introduction](#introduction)  
 - [Benefits](#benefits)  
 - [Demo](#demo)  
@@ -20,14 +16,13 @@ Absolutely! Here's your complete **CalmBot** README.md content, fully formatted 
 ---
 
 ## Introduction
+CalmBot is an innovative AI-powered mental health companion designed to provide empathetic, 24/7 support for users navigating their emotional well-being. Built for Hackathon 2025, CalmBot offers a web-based interface with a soothing, user-friendly design, enabling users to express emotions through interactive buttons (Happy, Sad, Angry, Anxious) or engage in freeform conversation.
 
-CalmBot is an innovative AI-powered mental health companion designed to provide empathetic, 24/7 support for users navigating their emotional well-being. Built for Hackathon 2025, CalmBot offers a web-based interface with a soothing, user-friendly design, enabling users to express emotions through interactive buttons (Happy, Sad, Angry, Anxious) or engage in freeform conversation.  
 With a unique learning feature that adapts to unknown inputs, CalmBot ensures accessibility, anonymity, and continuous improvement, addressing mental health stigma with compassion. The project leverages a Flask backend, a responsive Tailwind CSS frontend, and a SQLite database to deliver heartfelt responses tailored to users' emotional states.
 
 ---
 
 ## Benefits
-
 - **Interactive Mood Buttons:** Choose from Happy, Sad, Angry, or Anxious to receive detailed, five-paragraph responses filled with encouragement and coping strategies.  
 - **Conversational Chat:** Engage in dynamic dialogue with responses from a 1,000-entry dataset, featuring an animated chat box that appears seamlessly.  
 - **Adaptive Learning:** Logs unknown inputs to `unknown_inputs.json` and confirms learning, enhancing personalization.  
@@ -38,47 +33,40 @@ With a unique learning feature that adapts to unknown inputs, CalmBot ensures ac
 ---
 
 ## Demo
-
 Explore CalmBot in our 3-minute demo video:  
-CalmBot Demo Video (Replace with your video link)  
+[CalmBot Demo Video](#) *(Replace with your video link)*
 
-### Screenshots
+### Screenshots:
+#### Mood Selection  
+*(Add screenshot here)*
 
-_Mood Selection_  
-_Add screenshots to a `screenshots` folder in your repo_
+#### Chat Interface  
+*(Add screenshot here)*
 
-_Chat Interface_  
+*(Add screenshots to a `screenshots` folder in your repo)*
 
 ---
 
 ## Installation
 
 ### Prerequisites
-
 - Python 3.10+  
 - pip  
 - Git
 
 ### Steps
+```bash
+# Clone the Repository
+git clone https://github.com/yourusername/calmbot.git
+cd calmbot
 
-1. Clone the Repository:  
-   ```bash
-   git clone https://github.com/yourusername/calmbot.git
-   cd calmbot
-````
+# Install Dependencies
+pip install flask
 
-2. Install Dependencies:
+# Verify Dataset
+# Ensure model_log.json exists with 1,000 response pairs. If missing, regenerate:
+python generate_log.py
 
-   ```bash
-   pip install flask
-   ```
-
-3. Verify Dataset:
-   Ensure `model_log.json` exists with 1,000 response pairs. If missing, regenerate:
-
-   ```bash
-   python generate_log.py
-   ```
 
 4. Set Up Structure
    Confirm these files and folders exist:
