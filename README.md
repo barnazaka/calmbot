@@ -18,7 +18,11 @@
 ## Introduction
 CalmBot is an innovative AI-powered mental health companion designed to provide empathetic, 24/7 support for users navigating their emotional well-being. Built for Hackathon 2025, CalmBot offers a web-based interface with a soothing, user-friendly design, enabling users to express emotions through interactive buttons (Happy, Sad, Angry, Anxious) or engage in freeform conversation.
 
-With a unique learning feature that adapts to unknown inputs, CalmBot ensures accessibility, anonymity, and continuous improvement, addressing mental health stigma with compassion. The project leverages a Flask backend, a responsive Tailwind CSS frontend, and a SQLite database to deliver heartfelt responses tailored to users' emotional states.
+CalmBot also has a dedicated website designed for easy integration into popular social media and messaging platforms such as WhatsApp, Instagram, Facebook Messenger, Twitter, and Discord. This multi-platform approach ensures users can access mental health support wherever they feel most comfortable, making help more accessible and reducing barriers caused by stigma or technical limitations.
+
+Right now, CalmBot is live on Telegram as @calm56bot, providing immediate, anonymous support through a conversational interface.
+
+The project features a unique learning system that adapts to unknown inputs, enhancing personalization over time. CalmBot maintains user privacy and anonymity while offering continuous improvement. Technically, it leverages a Flask backend, a responsive Tailwind CSS frontend, and a SQLite database to deliver heartfelt, tailored responses to users’ emotional states.
 
 ---
 
