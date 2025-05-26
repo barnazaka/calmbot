@@ -54,7 +54,7 @@ Explore CalmBot in our 3-minute demo video:
 - pip  
 - Git
 
-### Steps
+## Steps
 ```bash
 # Clone the Repository
 git clone https://github.com/yourusername/calmbot.git
