@@ -55,29 +55,38 @@ Explore CalmBot in our 3-minute demo video:
 - Git
 
 ## Steps
-```bash
 # Clone the Repository
+```bash
 git clone https://github.com/yourusername/calmbot.git
 cd calmbot
+````
 
 # Install Dependencies
+
+```bash
 pip install flask
+```
 
 # Verify Dataset
-# Ensure model_log.json exists with 1,000 response pairs. If missing, regenerate:
+
+Ensure `model_log.json` exists with 1,000 response pairs. If missing, regenerate:
+
+```bash
 python generate_log.py
+```
 
+# Set Up Structure
 
-4. Set Up Structure
-   Confirm these files and folders exist:
+Confirm these files and folders exist:
 
-   * `server.py`
-   * `templates/index.html`
-   * `model_log.json`
-   * `unknown_inputs.json`
-   * `mood_tracker.db`
-   * `generate_log.py`
+* `server.py`
+* `templates/index.html`
+* `model_log.json`
+* `unknown_inputs.json`
+* `mood_tracker.db`
+* `generate_log.py`
 
+```
 ---
 
 ## Troubleshooting
