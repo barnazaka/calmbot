@@ -3,6 +3,8 @@
 
 **CalmBot** is an AI-powered emotional support platform designed to help users heal from unresolved trauma and find peace amid life’s chaos. CalmBot helps individuals recognize, monitor, and begin to mend deep emotional wounds that often trace back to childhood pain or societal neglect.
 
+**CalmBot** is currently available via a **responsive website** and **Telegram bot**. In the near future, we plan to integrate CalmBot into **WhatsApp**, **Facebook Messenger**, **Instagram**, and other popular platforms. This upcoming expansion will ensure stress-free access for anyone, anytime, on their preferred channel — making mental and emotional support more inclusive and accessible for all.
+
 Whether you're feeling happy, sad, angry, or anxious, CalmBot offers empathetic guidance, personalized actions, and a safe space for reflection. It supports your journey by fostering resilience and self-compassion.
 
 Accessible through a responsive website and a Telegram bot, CalmBot gives users access to support anytime and anywhere. Powered by Google’s Gemini model and a custom learning system with adaptive memory, it responds with emotional awareness and continuously grows smarter from each interaction.
@@ -36,6 +38,7 @@ CalmBot is more than a tool—it’s a companion for those seeking to reclaim th
 ### Multi-Platform Access
 - **Website:** Beautiful, responsive design for immersive support.
 - **Telegram Bot:** Instant access via social platforms, perfect for on-the-go users.
+- **Future Expansion** CalmBot is currently available via a responsive website and a Telegram bot. In the near future, we plan to integrate CalmBot into WhatsApp, Facebook Messenger, Instagram, and other popular platforms. This upcoming expansion will ensure stress-free access for anyone, anytime, on their preferred channel, making mental and emotional support more inclusive and accessible for all.
 
 ### Mental Health Resources
 - Links to trusted services like BetterHelp and Crisis Text Line for additional support.
