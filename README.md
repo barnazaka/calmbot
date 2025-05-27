@@ -1,10 +1,11 @@
 # CalmBot: Your Companion for Inner Peace 🌱
 
-**CalmBot** is an AI-powered emotional support platform designed to help users heal from unresolved trauma and find peace amidst life’s chaos. Built for the **Peace with Oneself** problem statement at Hackathon 2025, CalmBot empowers individuals to recognize, monitor, and mend deep-rooted emotional wounds, often stemming from childhood hurts or societal neglect.
 
-Whether you’re feeling happy, sad, angry, or anxious, CalmBot offers empathetic guidance, personalized actions, and a safe space to reflect—fostering resilience and self-compassion.
+**CalmBot** is an AI-powered emotional support platform designed to help users heal from unresolved trauma and find peace amid life’s chaos. Created for the **Peace with Oneself** challenge at Hackathon 2025, CalmBot helps individuals recognize, monitor, and begin to mend deep emotional wounds that often trace back to childhood pain or societal neglect.
 
-Accessible via a responsive website and a Telegram bot, CalmBot ensures users can seek support anytime, anywhere. Powered by Google’s Gemini model and a custom learning model with adaptive memory, CalmBot delivers trauma-aware responses and grows smarter by learning from user interactions.
+Whether you're feeling happy, sad, angry, or anxious, CalmBot offers empathetic guidance, personalized actions, and a safe space for reflection. It supports your journey by fostering resilience and self-compassion.
+
+Accessible through a responsive website and a Telegram bot, CalmBot gives users access to support anytime and anywhere. Powered by Google’s Gemini model and a custom learning system with adaptive memory, it responds with emotional awareness and continuously grows smarter from each interaction.
 
 ## 🧠 Problem Statement: Peace with Oneself
 
@@ -22,7 +23,7 @@ CalmBot is more than a tool—it’s a companion for those seeking to reclaim th
 ## 🌟 Features
 
 - **Emotion-Based Support:** Choose from *Happy*, *Sad*, *Angry*, or *Anxious* to receive tailored, empathetic responses that address trauma and suggest healing actions.
-- **Serenity Garden:** A virtual space to plant flowers with soothing bird and forest sounds to promote mindfulness and calm.
+**Serenity Garden:** A virtual space where you can plant flowers and listen to soothing bird and forest sounds to promote mindfulness and calm.
 - **Journaling:** Reflect on emotions with guided prompts, storing entries securely to track your healing journey.
 - **Breathing Exercises:** Guided 4-4-8 breathing to reduce stress and ground users in the present.
 - **Your Emotional Journey:** Visualize mood trends with a bar chart, celebrating progress in emotional awareness.
@@ -75,7 +76,7 @@ CalmBot is more than a tool—it’s a companion for those seeking to reclaim th
 
 ### Access CalmBot
 - Website: [http://localhost:5000](http://localhost:5000)
-- Telegram: Search for `@YourCalmBot`
+- Telegram: Search for `@calm56bot`
 
 ### Select Your Mood
 Click *Happy*, *Sad*, *Angry*, or *Anxious* to receive a Gemini-powered response.
@@ -98,7 +99,7 @@ Click *Happy*, *Sad*, *Angry*, or *Anxious* to receive a Gemini-powered response
 ## 💻 Installation
 
 ```bash
-git clone https://github.com/yourusername/calmbot.git
+git clone https://github.com/barnazaka/calmbot.git
 cd calmbot
 pip install flask python-telegram-bot google-generativeai python-dotenv textblob
 python -m textblob.download_corpora
@@ -191,28 +192,19 @@ Please review our **Code of Conduct** and use **GitHub Issues** for feedback or 
 
 ---
 
-## 📄 License
-
-MIT License. See [LICENSE](LICENSE) for details.
-
----
-
 ## 👥 Team
 
-Built with ❤️ by **\[Your Team Name]** for Hackathon 2025.
+Built with ❤️ by **Kohdee Team** for Hackathon organized by the Deepfunding Developer Outreach.
 Passionate about mental health, AI, and empowering healing journeys.
 
-* 📧 Contact: [support@calmbot.com](mailto:support@calmbot.com)
-* 🐙 GitHub: [@yourusername](https://github.com/yourusername)
-* ✈️ Telegram: [@YourCalmBot](https://t.me/YourCalmBot)
+* 📧 Contact: barnazaka@gmail.com and galadima892@gmail.com
+* 🐙 GitHub: barnazaka
+* ✈️ Telegram: @calm56bot
 
 ---
 
 ## 🙏 Acknowledgments
 
-* **Hackathon 2025:** For inspiring us to create CalmBot.
 * **Google Gemini:** For powering empathetic responses.
 * **Freesound.org:** For CC0 calming sounds.
 * **Open Source Community:** Flask, p5.js, and more.
-
-Let’s heal, grow, and find peace together with CalmBot 🌿
