@@ -189,9 +189,9 @@ CalmBot: I don’t know what you mean by "xyz," but I’ll learn! Can you explai
 We welcome contributions!
 
 1. Fork the repository.
-2. Create a new branch: `git checkout -b feature/your-feature`.
-3. Commit changes: `git commit -m "Add your feature"`.
-4. Push: `git push origin feature/your-feature`.
+2. Create a new branch.
+3. Commit changes.
+4. Push.
 5. Open a pull request.
 
 Please review our **Code of Conduct** and use **GitHub Issues** for feedback or bugs.
