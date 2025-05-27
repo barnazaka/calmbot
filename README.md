@@ -1,220 +1,211 @@
-# CalmBot - AI-Powered Mental Health Companion
+CalmBot: Your Companion for Inner Peace
+ 
+CalmBot is an AI-powered emotional support platform designed to help users heal from unresolved trauma and find peace amidst life’s chaos. Built for the Peace with Oneself problem statement at Hackathon 2025, CalmBot empowers individuals to recognize, monitor, and mend deep-rooted emotional wounds, often stemming from childhood hurts or societal neglect. Whether you’re feeling happy, sad, angry, or anxious, CalmBot offers empathetic guidance, personalized actions, and a safe space to reflect, fostering resilience and self-compassion.
+Accessible via a responsive website and a Telegram bot, CalmBot ensures users can seek support anytime, anywhere. Powered by Google’s Gemini model and a custom learning model with adaptive memory, CalmBot delivers trauma-aware responses and grows smarter by learning from user interactions. Join us in creating a world where inner peace is within everyone’s reach.
+Problem Statement: Peace with Oneself
+The Peace with Oneself challenge calls for solutions to help individuals heal from emotional distress and unresolved trauma, which often originate in childhood and are exacerbated by external chaos. CalmBot addresses this by:
 
-## Introduction
+Acknowledging Trauma: Recognizes potential wounds (e.g., neglect, betrayal) with empathy, validating users’ emotions.
+Empowering Healing: Offers actionable steps like journaling, breathing exercises, and mindfulness to process pain.
+Building Resilience: Motivates users to break cycles of avoidance and find strength in their journey.
+Creating Calm: Provides tools like the Serenity Garden and chat support to anchor users in peace.
 
-CalmBot is an innovative AI-powered mental health companion designed to provide empathetic, 24/7 support for users navigating their emotional well-being. It offers two main ways for users to connect:
+CalmBot is more than a tool—it’s a companion for those seeking to reclaim their emotional well-being and thrive.
+Features
 
-- **Website:** CalmBot has a dedicated web-based interface featuring a soothing, user-friendly design. Through the website, users can express emotions by clicking interactive mood buttons (Happy, Sad, Angry, Anxious) or engage in freeform conversation. The website experience is ideal for users who prefer a focused and distraction-free environment for mental health support.
+Emotion-Based Support: Choose from Happy, Sad, Angry, or Anxious to receive tailored, empathetic responses that address trauma and suggest healing actions.
+Serenity Garden: A virtual space to plant flowers, accompanied by soothing bird and forest sounds, promoting mindfulness and calm.
+Journaling: Reflect on emotions with guided prompts, storing entries securely to track your healing journey.
+Breathing Exercises: Guided 4-4-8 breathing to reduce stress and ground users in the present.
+Your Emotional Journey: Visualize mood trends with a bar chart, celebrating progress in emotional awareness.
+Chat Mode: Engage in freeform conversations via the website or Telegram bot, with responses that adapt to your emotional state.
+Dual AI Models:
+Gemini Model: Powers empathetic, trauma-aware responses for real-time support.
+Custom Learning Model: Learns from unknown inputs by asking for clarification, storing new knowledge in memory for future interactions.
 
-- **Bot:** Recognizing that most people spend more time on social media and messaging platforms than visiting websites, CalmBot is also available as a conversational bot. This bot runs on platforms like Telegram (currently live as [@calm56bot](https://t.me/calm56bot)) and can be extended to WhatsApp, Instagram, Facebook Messenger, Twitter, Discord, and more. The bot format allows easy access for users seeking quick, anonymous emotional support right where they already communicate daily.
 
-### Why both a website and a bot?
+Multi-Platform Access:
+Website: A beautifully designed, responsive interface for immersive support.
+Telegram Bot: Instant access via social platforms, perfect for on-the-go users.
 
-- **Website:** Provides a rich, immersive interface tailored to mental wellness, with calming visuals, smooth animations, and detailed responses to help users deeply reflect on their feelings.
-  
-- **Bot:** Offers instant, convenient access on popular social platforms where users already spend time, lowering the barrier to seeking help and increasing reach and engagement.
 
-CalmBot’s AI model is flexible and powers both the website and the bot, delivering heartfelt, empathetic responses. It adapts continuously through a unique learning feature that handles unknown inputs, ensuring personalized, evolving support while maintaining user privacy and anonymity.
+Mental Health Resources: Links to trusted services like BetterHelp and Crisis Text Line for additional support.
 
-Under the hood, CalmBot is built with a Flask backend, a responsive Tailwind CSS frontend for the website, and a SQLite database to log interactions securely.
+Tech Stack
+Backend
 
----
+Python: Core language for server and bot logic.
+Flask: Lightweight web framework for the CalmBot website.
+SQLite: Database for storing user moods, journal entries, and chat history.
+Google Generative AI (Gemini): Powers dynamic, empathetic responses.
+TextBlob: Fallback for sentiment analysis when Gemini is unavailable.
+python-telegram-bot: Handles Telegram bot interactions.
 
-## Benefits
+Frontend
 
-- **Interactive Mood Buttons:** Choose from Happy, Sad, Angry, or Anxious to receive detailed, five-paragraph responses filled with encouragement and coping strategies.  
-- **Conversational Chat:** Engage in dynamic dialogue with responses from a 1,000-entry dataset, featuring an animated chat box that appears seamlessly.  
-- **Adaptive Learning:** Logs unknown inputs to `unknown_inputs.json` and confirms learning, enhancing personalization.  
-- **Elegant UI:** Features calming gradients, Poppins typography, and smooth animations for a serene experience.  
-- **Privacy-First:** Stores interactions in `mood_tracker.db` with HIPAA-compliant logging, ensuring user anonymity.  
-- **Responsive Design:** Optimized for desktop and mobile, with intuitive navigation from mood selection to chat.
+HTML5/CSS3: Responsive website design with Tailwind CSS for styling.
+JavaScript: Client-side interactivity, powered by p5.js for Serenity Garden visuals.
+Tailwind CSS: Utility-first CSS for a modern, gradient-based UI.
+Google Fonts (Poppins): Clean typography for a welcoming feel.
 
----
+Tools & APIs
 
-## Demo
+Gemini API: For trauma-aware, motivational responses.
+Telegram API: Enables bot functionality on social platforms.
+python-dotenv: Manages environment variables (e.g., API keys).
+Freesound.org: CC0-licensed bird and forest sounds for Serenity Garden.
 
-Explore CalmBot in our 3-minute demo video:  
-*CalmBot Demo Video (Replace with your video link)*  
+Infrastructure
 
-### Screenshots:
+GitHub: Version control and collaboration.
+Windows (Local): Development environment (e.g., C:\Users\dell\calm).
+SQLite Database: Lightweight storage for user data.
 
-#### Mood Selection  
-*(Add screenshots to a `screenshots` folder in your repo)*  
+How It Works
 
-#### Chat Interface  
+Access CalmBot:
 
----
+Visit the website at http://localhost:5000 (or deployed URL).
+Interact via Telegram by searching for @YourCalmBot.
 
-## Installation
 
-### Prerequisites
+Select Your Mood:
 
-- Python 3.10+  
-- pip  
-- Git
+Click Happy, Sad, Angry, or Anxious on the website or Telegram buttons.
+Receive a Gemini-powered response acknowledging potential trauma and suggesting actions (e.g., “Your sadness is valid… Try journaling to let it out.”).
 
-### Steps
 
-```bash
-# Clone the Repository
+Engage with Features:
+
+Serenity Garden: Plant mood-colored flowers with calming audio.
+Journal: Answer prompts to reflect and heal.
+Breathing: Follow guided exercises to reduce stress.
+Chat: Use /chat on Telegram or the website’s chatbox for freeform support.
+
+
+Adaptive Learning:
+
+If CalmBot doesn’t understand an input (e.g., “xyz”), it asks, “Tell me what you mean by that.”
+Stores clarifications in memory (unknown_inputs.json), improving future responses.
+
+
+Track Progress:
+
+View mood trends in “Your Emotional Journey” on the website.
+All interactions are logged securely in SQLite for personalized insights.
+
+
+
+Installation
+
+Clone the Repository:
 git clone https://github.com/yourusername/calmbot.git
 cd calmbot
 
-# Install Dependencies
-pip install flask
 
-# Verify Dataset
-# Ensure model_log.json exists with 1,000 response pairs. If missing, regenerate:
-python generate_log.py
-````
+Install Dependencies:
+pip install flask python-telegram-bot google-generativeai python-dotenv textblob
+python -m textblob.download_corpora
 
----
 
-## Set Up Structure
+Set Up Environment:
 
-Confirm these files and folders exist:
+Create .env in calmbot/:TELEGRAM_TOKEN=your_telegram_token
+GOOGLE_API_KEY=your_gemini_api_key
 
-* `server.py`
-* `templates/index.html`
-* `model_log.json`
-* `unknown_inputs.json`
-* `mood_tracker.db`
-* `generate_log.py`
 
----
+Place index.html in calmbot/templates/.
+Place audio files (e.g., bird_sounds.mp3) in calmbot/static/.
 
-## Troubleshooting
 
-* **Missing `model_log.json`:** Run
-
-  ```bash
-  python generate_log.py
-  ```
-
-* **Flask Errors: Check version**
-
-  ```bash
-  python -c "import flask; print(flask.__version__)"
-  ```
-
----
-
-## Usage
-
-### Start the Server
-
-```bash
+Run the Website:
 python server.py
-```
 
-### Access CalmBot
 
-Open [http://localhost:5000](http://localhost:5000) in your browser.
+Access at http://localhost:5000.
 
-### Interact
 
-* Click a mood button (Happy, Sad, Angry, Anxious) to view a response.
-* Select **Continue the Conversation** to open the chat interface.
-* Test the learning feature by typing “Alot”, then “Lots on my mind”.
-* Use the **How Are You Feeling Today?** button to return to mood selection.
+Run the Telegram Bot:
+python calmbot.py
 
----
 
-## Monitor Logs
+Interact via Telegram (@YourCalmBot).
 
-```bash
-# View interactions
-sqlite3 mood_tracker.db "SELECT * FROM responses LIMIT 5;"
 
-# Check unknown inputs
-cat unknown_inputs.json
-```
+Database:
 
----
+SQLite database (mood_tracker.db) is created automatically.
+Stores moods, journal entries, and chat history.
 
-## Project Structure
 
-```bash
-calmbot/
-├── server.py              # Flask backend
-├── templates/
-│   └── index.html         # Frontend UI
-├── model_log.json         # Response dataset
-├── unknown_inputs.json    # Unknown input logs
-├── mood_tracker.db        # SQLite database
-├── generate_log.py        # Dataset generator
-├── README.md              # Documentation
-└── screenshots/           # Demo images
-```
 
----
+Usage
 
-## Technologies Used
+Website:
 
-**Frontend:**
+Navigate to the homepage, select a mood, and explore features like Serenity Garden or journaling.
+Use the chatbox for real-time support.
+View your emotional progress in “Your Emotional Journey.”
 
-* HTML5
-* Tailwind CSS (CDN)
-* JavaScript (ES6)
-* Poppins Font (Google Fonts)
 
-**Backend:**
+Telegram Bot:
 
-* Flask (Python)
-* SQLite
+Start with /start to see mood buttons.
+Use /chat for freeform conversations.
+Responses adapt based on your input and history.
 
-**Data:**
 
-* JSON (`model_log.json`, `unknown_inputs.json`)
+Example Interaction:
 
-**Environment:**
+User: “I’m feeling stressed.”
+CalmBot: “Stress can feel so heavy, often tied to life’s chaos or past worries. Try a 4-4-8 breathing exercise: inhale for 4, hold for 4, exhale for 8. Want to share more? I’m here.”
+User: “xyz”
+CalmBot: “I don’t know what you mean by ‘xyz,’ but I’ll learn! Can you explain it? Let’s keep chatting.”
 
-* Python 3.10
-* Windows PowerShell
 
----
 
-## Contributing
+Why CalmBot?
+CalmBot stands out by:
 
-We welcome contributions to make CalmBot even better!
+Trauma-Aware Design: Aligns with Peace with Oneself, addressing childhood wounds and societal noise with empathy.
+Dual AI Approach: Combines Gemini’s robustness with a custom model that learns from users, ensuring personalized support.
+Accessible Platforms: Website and Telegram bot make emotional care available 24/7.
+Holistic Healing: Integrates mindfulness (Serenity Garden, breathing), reflection (journaling), and motivation (chat) for comprehensive support.
+Privacy-First: Stores data locally in SQLite, prioritizing user trust.
 
-* **Fork the Repository:** Click “Fork” on GitHub.
-* **Create a Branch:**
+Future Enhancements
 
-  ```bash
-  git checkout -b feature/your-feature
-  ```
-* **Make Changes:** Update code, ensuring compatibility.
-* **Test Locally:** Run `python server.py` and test at [http://localhost:5000](http://localhost:5000).
-* **Submit a Pull Request:** Push changes and open a PR with a detailed description.
+Mobile App: Develop iOS/Android apps for broader access.
+Advanced Learning: Train the custom model on user data for deeper personalization.
+Multilingual Support: Add languages to reach diverse communities.
+Wearable Integration: Sync with devices to monitor stress and suggest real-time interventions.
+Community Features: Create a safe space for users to share stories and support each other.
 
-### Guidelines
+Contributing
+We welcome contributions! To get started:
 
-* Adhere to PEP 8 for Python.
-* Preserve the empathetic tone in UI text.
-* Test all features (moods, buttons, chat).
+Fork the repository.
+Create a branch: git checkout -b feature/your-feature.
+Commit changes: git commit -m "Add your feature".
+Push: git push origin feature/your-feature.
+Open a pull request.
 
----
+Please follow our Code of Conduct and report issues via GitHub Issues.
+License
+This project is licensed under the MIT License. See LICENSE for details.
+Team
+Built with ❤️ by [Your Team Name] for Hackathon 2025. We’re passionate about mental health, AI, and creating solutions that empower healing.
 
-## License
+Contact: support@calmbot.com
+GitHub: yourusername
+Telegram: @YourCalmBot
 
-MIT License
-See LICENSE file for details.
+Acknowledgments
 
----
+Hackathon 2025: For inspiring us to tackle Peace with Oneself.
+Google Gemini: For powering empathetic AI responses.
+Freesound.org: For CC0 audio enhancing the Serenity Garden.
+Open Source Community: For tools like Flask, p5.js, and python-telegram-bot.
 
-## Acknowledgements
 
-* Hackathon 2025, organized by DeepFunding Developer Outright Circle: For inspiring this project.
-* Mental Health Community: For highlighting accessible support needs.
-* Tailwind CSS & Poppins: For a beautiful UI.
-
----
-
-## Contact
-
-For inquiries or collaboration:
-
-* **Email:** 
-* **GitHub:** 
-* **Support:** 
+Let’s heal, grow, and find peace together with CalmBot. 🌱
