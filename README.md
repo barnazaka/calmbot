@@ -77,6 +77,7 @@ CalmBot is more than a tool—it’s a companion for those seeking to reclaim th
 ### Access CalmBot
 - Website: [http://localhost:5000](http://localhost:5000)
 - Telegram: Search for `@calm56bot`
+- Video link: https://drive.google.com/file/d/1cK67B3pFBr6WiDn-L-hdvR1b_41KU7x7/view?usp=sharing
 
 ### Select Your Mood
 Click *Happy*, *Sad*, *Angry*, or *Anxious* to receive a Gemini-powered response.
