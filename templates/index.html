@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalmBot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/addons/p5.sound.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #a5b4fc, #e0e7ff, #c4b5fd);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            transition: background 0.5s ease;
+        }
+        .chat-bubble {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 16px;
+            margin: 12px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .user-bubble {
+            background: linear-gradient(to right, #93c5fd, #60a5fa);
+            color: #1e3a8a;
+        }
+        .bot-bubble {
+            background: linear-gradient(to right, #fefcbf, #fef08a);
+            color: #713f12;
+        }
+        .emotion-btn {
+            background: linear-gradient(45deg, #e0e7ff, #c4b5fd);
+            border: 2px solid #a5b4fc;
+            border-radius: 12px;
+            padding: 16px;
+            font-weight: 600;
+            color: #1e3a8a;
+            transition: transform 0.3s ease-in, box-shadow 0.3s ease;
+        }
+        .emotion-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        .action-btn {
+            background: linear-gradient(to right, #60a5fa, #3b82f6);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-weight: 600;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+        .action-btn:hover {
+            transform: scale(1.05);
+        }
+        .response-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .chat-section {
+            display: none;
+        }
+        .chat-section.visible {
+            display: block;
+        }
+        .return-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(to right, #60a5fa, #3b82f6);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            z-index: 1000;
+            display: none;
+        }
+        .return-btn.visible {
+            display: block;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .modal-content {
+            background: linear-gradient(135deg, #ffffff, #e0e7ff);
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        .breathing-circle {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #60a5fa, #3b82f6);
+            border-radius: 50%;
+            animation: breathe 8s ease-in-out infinite;
+            margin: 0 auto;
+        }
+        .progress-box {
+            background: linear-gradient(135deg, #f3e8ff, #dbeafe);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            border: 2px solid #a5b4fc;
+        }
+        .progress-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <button id="return-btn" class="return-btn" aria-label="Return to emotion selection">Back to Emotions</button>
+
+    <header class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white py-8 text-center">
+        <h1 class="text-5xl font-bold">CalmBot</h1>
+        <p class="mt-3 text-xl">Your AI companion for inner peace</p>
+    </header>
+
+    <section id="hero-section" class="py-16 px-4 text-center">
+        <h2 class="text-4xl font-semibold text-indigo-800">Welcome to CalmBot</h2>
+        <p class="mt-6 max-w-2xl mx-auto text-lg text-gray-700">
+            Explore your emotions and find calm. Choose how you’re feeling to start your journey.
+        </p>
+    </section>
+
+    <section id="emotion-section" class="py-12 px-4">
+        <h3 class="text-3xl font-semibold text-center text-indigo-800 mb-8">How Are You Feeling?</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            <button id="happiness" class="emotion-btn">😊 Happy</button>
+            <button id="sadness" class="emotion-btn">😢 Sad</button>
+            <button id="anger" class="emotion-btn">😡 Angry</button>
+            <button id="anxiety" class="emotion-btn">😟 Anxious</button>
+        </div>
+        <div id="response" class="mt-12 max-w-4xl mx-auto text-gray-800 response-container hidden"></div>
+    </section>
+
+    <section id="progress-section" class="py-12 px-4 max-w-4xl mx-auto hidden">
+        <h3 class="progress-title">Your Emotional Journey</h3>
+        <div id="progress-content" class="progress-box mt-6">
+            <div id="progress-canvas" style="width: 100%; height: 200px;"></div>
+            <p id="progress-message" class="text-center text-gray-700 mt-4 italic"></p>
+        </div>
+    </section>
+
+    <section id="chat-section" class="chat-section py-12 px-4 max-w-4xl mx-auto">
+        <h3 class="text-3xl font-semibold text-center text-indigo-800 mb-8">Talk to CalmBot</h3>
+        <div id="chat-box" class="h-96 overflow-y-auto p-6 border border-indigo-200 rounded-2xl bg-white/80"></div>
+        <div class="mt-6 flex">
+            <input id="chat-input" type="text" class="flex-grow p-4 border border-indigo-200 rounded-l-2xl focus:outline-none focus:ring-2 focus:ring-indigo-400" placeholder="Share your thoughts...">
+            <button id="send-btn" class="bg-indigo-600 text-white px-8 rounded-r-2xl hover:bg-indigo-700">Send</button>
+        </div>
+    </section>
+
+    <section id="resources-section" class="py-12 px-4 max-w-4xl mx-auto">
+        <h3 class="text-3xl font-semibold text-center text-indigo-800 mb-8">More Support</h3>
+        <div class="response-container">
+            <p class="text-gray-800">Connect with mental health resources:</p>
+            <ul class="list-disc pl-6 mt-4">
+                <li><a href="https://www.betterhelp.com" class="text-indigo-600 hover:underline" target="_blank">BetterHelp</a></li>
+                <li><a href="https://www.psychologytoday.com" class="text-indigo-600 hover:underline" target="_blank">Psychology Today</a></li>
+                <li><a href="https://www.crisistextline.org" class="text-indigo-600 hover:underline" target="_blank">Crisis Text Line</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <div id="journal-modal" class="modal">
+        <div class="modal-content space-y-4">
+            <h3 class="text-2xl font-semibold text-indigo-800">Journal Your Thoughts</h3>
+            <p id="journal-prompt" class="text-gray-800"></p>
+            <textarea id="journal-input" class="w-full p-4 border border-indigo-200 rounded-lg" rows="5" placeholder="Write your thoughts..."></textarea>
+            <div class="flex justify-center gap-4">
+                <button id="save-journal" class="action-btn">Save</button>
+                <button id="close-journal" class="action-btn bg-gray-400 hover:bg-gray-500">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="breathing-modal" class="modal">
+        <div class="modal-content space-y-4 p-6">
+            <h3 class="text-2xl font-semibold text-indigo-800">Breathing Exercise</h3>
+            <p class="text-gray-800">Inhale (4s), hold (4s), exhale (8s).</p>
+            <div class="breathing-circle mx-auto mb-6"></div>
+            <audio id="breathing-audio" loop src="https://freesound.org/data/previews/262/262376_4760685-lq.mp3"></audio>
+            <div class="flex justify-center gap-4">
+                <button id="play-breathing-audio" class="action-btn">Play</button>
+                <button id="pause-breathing-audio" class="action-btn bg-gray-400 hover:bg-gray-500">Pause</button>
+                <button id="close-breathing" class="action-btn bg-gray-400 hover:bg-gray-500">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="garden-modal" class="modal">
+        <div class="modal-content space-y-4 p-6">
+            <h3 class="text-2xl font-semibold text-indigo-800">Serenity Garden</h3>
+            <p class="text-gray-800">Click to plant flowers and create calm.</p>
+            <div id="garden-canvas" style="width: 100%; height: 300px; border: 2px solid #a5b4fc; border-radius: 8px;"></div>
+            <audio id="garden-audio">
+            <source src="/static/bird_sounds.mp3" type="audio/mp3">
+            <source src="/static/forest_sounds.mp3" type="audio/mp3">
+            </audio>
+            <div class="flex justify-center gap-4">
+                <button id="play-garden-audio" class="action-btn">Play</button>
+                <button id="pause-garden-audio" class="action-btn bg-gray-400 hover:bg-gray-500">Pause</button>
+                <button id="close-garden" class="action-btn bg-gray-400 hover:bg-gray-500">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white py-8 text-center mt-auto">
+        <p class="text-lg">Hackathon 2025 | Powered by Empathy</p>
+        <p class="mt-2">Support: support@calmbot.com</p>
+    </footer>
+
+    <script>
+        let userId = '123';
+        let currentMood = null;
+        let flowers = [];
+
+        const moodStyles = {
+            happiness: 'linear-gradient(135deg, #fefcbf, #f59e0b)',
+            sadness: 'linear-gradient(135deg, #bfdbfe, #3b82f6)',
+            anger: 'linear-gradient(135deg, #fecaca, #ef4444)',
+            anxiety: 'linear-gradient(135deg, #bbf7d0, #10b981)'
+        };
+
+        const moodResponses = {
+            happiness: "It’s beautiful to feel happiness today, a rare light that warms your soul amidst life’s storms. Even if this joy feels fleeting or shadowed by past traumas—maybe childhood wounds or moments of neglect that still whisper doubt—you’re here, choosing to embrace this moment. Happiness doesn’t erase pain, but it’s proof of resilience, a reminder that you can rise above the noise of a chaotic world. Let this spark guide you to heal, to find peace within. You’re stronger than the scars you carry, and every smile is a step toward mending your heart. Explore this feeling through journaling, breathing, or planting mindfulness in the Serenity Garden, and let CalmBot walk with you toward lasting calm.",
+            sadness: "Sadness can feel like a heavy cloak, woven from unresolved traumas or childhood hurts that linger in your heart. It’s okay to feel this weight; acknowledging it is a brave act of self-love. The world’s noise—full of avoidance and neglect—may try to drown you, but you’re here, seeking peace. Your tears are not weakness but a call to heal, to break the cycles of pain. You have the strength to face these wounds, to find calm amidst the chaos. Let CalmBot guide you with a journal to pour out your thoughts, a breathing exercise to soothe your soul, or a moment in the Serenity Garden to plant hope. You’re not alone, and every step you take is a victory toward inner peace.",
+            anger: "Anger burns fiercely, often fueled by deep wounds—perhaps from childhood betrayals or traumas that left scars on your soul. It’s a powerful signal that something within needs attention, not suppression. The world’s chaos may amplify this fire, pushing you toward avoidance or lashing out, but you’re here, choosing to confront it. That’s courage. Your anger doesn’t define you; it’s a call to heal, to transform pain into strength. You’re capable of finding peace, of silencing the noise that seeks to consume you. Channel this energy with CalmBot—write in your journal to release the heat, breathe to cool the flames, or plant flowers in the Serenity Garden. Every moment you face your anger is a step toward reclaiming your calm, and you’re unstoppable in this journey.",
+            anxiety: "Anxiety can feel like a relentless storm, stirred by traumas or childhood fears that cling to your mind, whispering neglect or doubt. It’s exhausting, but your presence here is a testament to your resilience. The world’s noise may try to pull you under, but you’re fighting for peace, for a calm that anchors your soul. Anxiety doesn’t own you; it’s a signal to pause, to heal those hidden wounds. You have the power to break free from these cycles, to find clarity amidst the chaos. Let CalmBot be your guide—journal to untangle your thoughts, breathe to steady your heart, or plant flowers in the Serenity Garden to reclaim your calm. You’re stronger than the fears that haunt you, and every breath you take is a step toward lasting peace."
+        };
+
+        const journalPrompts = {
+            happiness: "What made you smile today?",
+            sadness: "What’s on your heart? Let it out.",
+            anger: "What sparked your anger? How can you find calm?",
+            anxiety: "What’s worrying you? Let’s explore it."
+        };
+
+        function initGarden() {
+            new p5(sketch => {
+                sketch.setup = () => {
+                    let canvas = sketch.createCanvas(560, 300);
+                    canvas.parent('garden-canvas');
+                    sketch.background(135, 206, 235);
+                    flowers = [];
+                };
+                sketch.draw = () => {
+                    sketch.background(135, 206, 235);
+                    sketch.fill(34, 139, 34);
+                    sketch.rect(0, sketch.height - 50, sketch.width, 50);
+                    for (let flower of flowers) {
+                        sketch.fill(flower.color);
+                        sketch.ellipse(flower.x, flower.y - 20, 20, 20);
+                        sketch.stroke(0, 100, 0);
+                        sketch.strokeWeight(2);
+                        sketch.line(flower.x, flower.y, flower.x, flower.y - 20);
+                    }
+                };
+                sketch.mousePressed = () => {
+                    if (sketch.mouseX > 0 && sketch.mouseX < sketch.width && sketch.mouseY > 0 && sketch.mouseY < sketch.height) {
+                        let color = sketch.color(255, 105, 180);
+                        if (currentMood === 'happiness') color = sketch.color(255, 215, 0);
+                        else if (currentMood === 'sadness') color = sketch.color(70, 130, 180);
+                        else if (currentMood === 'anger') color = sketch.color(220, 20, 60);
+                        else if (currentMood === 'anxiety') color = sketch.color(60, 179, 113);
+                        flowers.push({ x: sketch.mouseX, y: sketch.mouseY, color });
+                    }
+                };
+            }, 'garden-canvas');
+        }
+
+        async function fetchProgress() {
+            try {
+                const res = await fetch('/progress', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_id: userId })
+                });
+                const data = await res.json();
+                document.getElementById('progress-message').innerText = `${data.summary}\nYou're making beautiful progress on your emotional journey!`;
+                new p5(sketch => {
+                    sketch.setup = () => {
+                        let canvas = sketch.createCanvas(560, 200);
+                        canvas.parent('progress-canvas');
+                    };
+                    sketch.draw = () => {
+                        sketch.background(255);
+                        let barWidth = sketch.width / data.emotions.length;
+                        let colors = ['#f59e0b', '#3b82f6', '#ef4444', '#10b981'];
+                        for (let i = 0; i < data.emotions.length; i++) {
+                            sketch.fill(colors[i]);
+                            let h = sketch.map(data.counts[i], 0, Math.max(...data.counts, 10), 0, sketch.height - 40);
+                            sketch.rect(i * barWidth + 10, sketch.height - h, barWidth - 20, h);
+                            sketch.fill(0);
+                            sketch.textAlign(sketch.CENTER);
+                            sketch.text(data.emotions[i], i * barWidth + barWidth / 2, sketch.height - 10);
+                            sketch.text(data.counts[i], i * barWidth + barWidth / 2, sketch.height - h - 10);
+                        }
+                    };
+                }, 'progress-canvas');
+            } catch (error) {
+                document.getElementById('progress-message').innerText = 'Unable to load progress.';
+                console.error('Error:', error);
+            }
+        }
+
+        function playGardenAudio() {
+            const gardenAudio = document.getElementById('garden-audio');
+            gardenAudio.play().catch(error => {
+                console.error('Audio playback failed:', error);
+                gardenAudio.src = 'https://freesound.org/data/previews/415/209/441_5121236-lq.mp3';
+                gardenAudio.play().catch(err => console.error('Fallback audio failed:', err));
+            });
+        }
+
+        const emotionSection = document.getElementById('emotion-section');
+        const responseDiv = document.getElementById('response');
+        const chatSection = document.getElementById('chat-section');
+        const returnBtn = document.getElementById('return-btn');
+        const heroSection = document.getElementById('hero-section');
+        const progressSection = document.getElementById('progress-section');
+        const journalModal = document.getElementById('journal-modal');
+        const journalInput = document.getElementById('journal-input');
+        const journalPrompt = document.getElementById('journal-prompt');
+        const breathingModal = document.getElementById('breathing-modal');
+        const gardenModal = document.getElementById('garden-modal');
+        const breathingAudio = document.getElementById('breathing-audio');
+
+        document.querySelectorAll('.emotion-btn').forEach(button => {
+            button.addEventListener('click', async () => {
+                currentMood = button.id;
+                document.body.style.background = moodStyles[currentMood] || 'linear-gradient(135deg, #a5b4fc, #e0e7ff, #c4b5fd)';
+                responseDiv.innerHTML = '<p class="text-center text-indigo-600">Loading...</p>';
+                responseDiv.classList.remove('hidden');
+                try {
+                    // Still log mood to server for progress tracking
+                    await fetch(`/mood/${currentMood}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ user_id: userId })
+                    });
+                    responseDiv.innerHTML = `
+                        <div class="text-lg leading-relaxed">${moodResponses[currentMood]}</div>
+                        <div class="flex justify-center gap-4 mt-6 flex-wrap">
+                            <button id="journal-btn" class="action-btn">Journal</button>
+                            <button id="breathing-btn" class="action-btn">Breathing</button>
+                            <button id="garden-btn" class="action-btn">Serenity Garden</button>
+                            <button id="show-chat" class="action-btn">Chat</button>
+                        </div>
+                    `;
+                    document.getElementById('journal-btn').addEventListener('click', () => {
+                        journalPrompt.textContent = journalPrompts[currentMood] || "How are you feeling?";
+                        journalModal.style.display = 'flex';
+                    });
+                    document.getElementById('breathing-btn').addEventListener('click', () => {
+                        breathingModal.style.display = 'flex';
+                        breathingAudio.play();
+                    });
+                    document.getElementById('garden-btn').addEventListener('click', () => {
+                        gardenModal.style.display = 'flex';
+                        initGarden();
+                        document.getElementById('garden-audio').load();
+                        playGardenAudio();
+                    });
+                    document.getElementById('show-chat').addEventListener('click', () => {
+                        emotionSection.classList.add('hidden');
+                        responseDiv.classList.add('hidden');
+                        chatSection.classList.add('visible');
+                        returnBtn.classList.add('visible');
+                        progressSection.classList.remove('hidden');
+                        fetchProgress();
+                    });
+                } catch (error) {
+                    responseDiv.innerHTML = '<p class="text-red-600 text-center">Error loading response.</p>';
+                    console.error('Error:', error);
+                }
+            });
+        });
+
+        document.getElementById('save-journal').addEventListener('click', async () => {
+            const entry = journalInput.value.trim();
+            if (entry) {
+                try {
+                    await fetch('/journal', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ user_id: userId, entry })
+                    });
+                    journalModal.style.display = 'none';
+                    journalInput.value = '';
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+        });
+        document.getElementById('close-journal').addEventListener('click', () => {
+            journalModal.style.display = 'none';
+        });
+
+        document.getElementById('play-breathing-audio').addEventListener('click', () => {
+            breathingAudio.play();
+        });
+        document.getElementById('pause-breathing-audio').addEventListener('click', () => {
+            breathingAudio.pause();
+        });
+        document.getElementById('close-breathing').addEventListener('click', () => {
+            breathingModal.style.display = 'none';
+            breathingAudio.pause();
+        });
+
+        document.getElementById('play-garden-audio').addEventListener('click', () => {
+            playGardenAudio();
+        });
+        document.getElementById('pause-garden-audio').addEventListener('click', () => {
+            document.getElementById('garden-audio').pause();
+        });
+        document.getElementById('close-garden').addEventListener('click', () => {
+            gardenModal.style.display = 'none';
+            document.getElementById('garden-audio').pause();
+        });
+
+        returnBtn.addEventListener('click', () => {
+            emotionSection.classList.remove('hidden');
+            chatSection.classList.remove('visible');
+            returnBtn.classList.remove('visible');
+            progressSection.classList.add('hidden');
+            responseDiv.classList.add('hidden');
+            document.body.style.background = 'linear-gradient(135deg, #a5b4fc, #e0e7ff, #c4b5fd)';
+        });
+
+        const chatBox = document.getElementById('chat-box');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+
+        async function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+            const userBubble = document.createElement('div');
+            userBubble.className = 'chat-bubble user-bubble';
+            userBubble.textContent = message;
+            chatBox.appendChild(userBubble);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            chatInput.value = '';
+            try {
+                const res = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message, user_id: userId })
+                });
+                const data = await res.json();
+                const botBubble = document.createElement('div');
+                botBubble.className = 'chat-bubble bot-bubble';
+                botBubble.textContent = data.response;
+                chatBox.appendChild(botBubble);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', e => {
+            if (e.key === 'Enter') sendMessage();
+        });
+    </script>
+</body>
+</html>
