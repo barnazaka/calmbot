@@ -1,6 +1,3 @@
-Here is your GitHub README formatted in Markdown, ready to be used as a `README.md` file for your CalmBot project:
-
-````markdown
 # CalmBot: Your Companion for Inner Peace 🌱
 
 **CalmBot** is an AI-powered emotional support platform designed to help users heal from unresolved trauma and find peace amidst life’s chaos. Built for the **Peace with Oneself** problem statement at Hackathon 2025, CalmBot empowers individuals to recognize, monitor, and mend deep-rooted emotional wounds, often stemming from childhood hurts or societal neglect.
