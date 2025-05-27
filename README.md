@@ -38,8 +38,12 @@ CalmBot is more than a tool—it’s a companion for those seeking to reclaim th
 - **Telegram Bot:** Instant access via social platforms, perfect for on-the-go users.
 - **Future Expansion** CalmBot is currently available via a responsive website and a Telegram bot. In the near future, we plan to integrate CalmBot into WhatsApp, Facebook Messenger, Instagram, and other popular platforms. This upcoming expansion will ensure stress-free access for anyone, anytime, on their preferred channel, making mental and emotional support more inclusive and accessible for all.
 
-### Mental Health Resources
-- Links to trusted services like BetterHelp and Crisis Text Line for additional support.
+## 🧰 Mental Health Resources
+
+We also connect users to trusted external services for additional help:
+
+- [**BetterHelp**](https://www.betterhelp.com/)
+- [**Crisis Text Line**](https://www.crisistextline.org/)
 
 ---
 
