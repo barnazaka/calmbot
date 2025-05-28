@@ -204,7 +204,7 @@ Built with ❤️ by **Kohdee Team** for Hackathon organized by the Deepfunding 
 Passionate about mental health, AI, and empowering healing journeys.
 
 * 📧 Contact: barnazaka@gmail.com and galadima892@gmail.com
-* 🐙 GitHub: barnazaka kod
+* 🐙 GitHub: barnazaka, KOD892
 * ✈️ Telegram: @calm56bot
 
 ---
