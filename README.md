@@ -203,7 +203,7 @@ Please review our **Code of Conduct** and use **GitHub Issues** for feedback or 
 Built with ❤️ by **Kohdee Team** for Hackathon organized by the Deepfunding Developer Outreach.
 Passionate about mental health, AI, and empowering healing journeys.
 
-* 📧 Contact: barnazaka@gmail.com and galadima892@gmail.com
+* 📧 Contact: barnazaka@gmail.com and galadimad892@gmail.com
 * 🐙 GitHub: barnazaka, KOD892
 * ✈️ Telegram: @calm56bot
 
