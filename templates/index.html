@@ -123,6 +123,10 @@
             color: #1e3a8a;
             text-align: center;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
         @keyframes breathe {
             0%, 100% { transform: scale(1); }
@@ -233,7 +237,7 @@
     </div>
 
     <footer class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white py-8 text-center mt-auto">
-        <p class="text-lg">Deep Funding Hackathon 2025 | Powered by Empathy</p>
+        <p class="text-lg"> Deep Funding Hackathon 2025 | Powered by Empathy</p>
         <p class="mt-2">Kohdee Team</p>
     </footer>
 
@@ -253,17 +257,20 @@
             happiness: "It’s beautiful to feel happiness today, a rare light that warms your soul amidst life’s storms. Even if this joy feels fleeting or shadowed by past traumas—maybe childhood wounds or moments of neglect that still whisper doubt—you’re here, choosing to embrace this moment. Happiness doesn’t erase pain, but it’s proof of resilience, a reminder that you can rise above the noise of a chaotic world. Let this spark guide you to heal, to find peace within. You’re stronger than the scars you carry, and every smile is a step toward mending your heart. Explore this feeling through journaling, breathing, or planting mindfulness in the Serenity Garden, and let CalmBot walk with you toward lasting calm.",
             sadness: "Sadness can feel like a heavy cloak, woven from unresolved traumas or childhood hurts that linger in your heart. It’s okay to feel this weight; acknowledging it is a brave act of self-love. The world’s noise—full of avoidance and neglect—may try to drown you, but you’re here, seeking peace. Your tears are not weakness but a call to heal, to break the cycles of pain. You have the strength to face these wounds, to find calm amidst the chaos. Let CalmBot guide you with a journal to pour out your thoughts, a breathing exercise to soothe your soul, or a moment in the Serenity Garden to plant hope. You’re not alone, and every step you take is a victory toward inner peace.",
             anger: "Anger burns fiercely, often fueled by deep wounds—perhaps from childhood betrayals or traumas that left scars on your soul. It’s a powerful signal that something within needs attention, not suppression. The world’s chaos may amplify this fire, pushing you toward avoidance or lashing out, but you’re here, choosing to confront it. That’s courage. Your anger doesn’t define you; it’s a call to heal, to transform pain into strength. You’re capable of finding peace, of silencing the noise that seeks to consume you. Channel this energy with CalmBot—write in your journal to release the heat, breathe to cool the flames, or plant flowers in the Serenity Garden. Every moment you face your anger is a step toward reclaiming your calm, and you’re unstoppable in this journey.",
-            anxiety: "Anxiety can feel like a relentless storm, stirred by traumas or childhood fears that cling to your mind, whispering neglect or doubt. It’s exhausting, but your presence here is a testament to your resilience. The world’s noise may try to pull you under, but you’re fighting for peace, for a calm that anchors your soul. Anxiety doesn’t own you; it’s a signal to pause, to heal those hidden wounds. You have the power to break free from these cycles, to find clarity amidst the chaos. Let CalmBot be your guide—journal to untangle your thoughts, breathe to steady your heart, or plant flowers in the Serenity Garden to reclaim your calm. You’re stronger than the fears that haunt you, and every breath you take is a step toward lasting peace."
+            anxiety: "Anxiety can feel like a relentless storm, stirred by traumas or childhood fears that cling to your mind, whispering neglect or doubt. It’s exhausting, but your presence here is a testament to your resilience. The world’s noise may try to pull you under, but you’re fighting for peace, for a calm that anchors your soul. Anxiety doesn’t own you; it’s a signal to pause, to heal those hidden wounds. You have the power to break free from these cycles, to find clarity amidst the chaos. Let CalmBot be your guide—journal to untangle your thoughts, breathe to steady your heart, or plant flowers in the Serenity Garden to reclaim your calm. You’re stronger than the fears that haunt you, and every breath you take is a step toward lasting peace"
         };
 
         const journalPrompts = {
             happiness: "What made you smile today?",
             sadness: "What’s on your heart? Let it out.",
             anger: "What sparked your anger? How can you find calm?",
-            anxiety: "What’s worrying you? Let’s explore it."
+            anxiety: "What’s worrying you? Let’s explore it"
         };
 
         function initGarden() {
+            // Remove any existing p5.js canvas to prevent overlap
+            const existingCanvas = document.querySelector('#garden-canvas canvas');
+            if (existingCanvas) existingCanvas.remove();
             new p5(sketch => {
                 sketch.setup = () => {
                     let canvas = sketch.createCanvas(560, 300);
@@ -305,6 +312,9 @@
                 });
                 const data = await res.json();
                 document.getElementById('progress-message').innerText = `${data.summary}\nYou're making beautiful progress on your emotional journey!`;
+                // Remove any existing p5.js canvas to prevent overlap
+                const existingCanvas = document.querySelector('#progress-canvas canvas');
+                if (existingCanvas) existingCanvas.remove();
                 new p5(sketch => {
                     sketch.setup = () => {
                         let canvas = sketch.createCanvas(560, 200);
