@@ -100,7 +100,7 @@ BUTTON_RESPONSES = {
         "Anxiety can feel like a storm in your mind, with racing thoughts, worry, or a sense of unease that’s hard to shake. It often arises from stress, uncertainty, or feeling overwhelmed, but it’s a sign that your mind is trying to protect you. You’re not alone in feeling this way, and simply acknowledging it is a courageous act. You have the power to find calm amidst the chaos, and I’m here to support you every step of the way.\n\n"
         "To soothe anxiety, grounding techniques can anchor you in the present. Try the 4-4-8 breathing method: inhale for 4 seconds, hold for 4, exhale for 8, repeating for 5 minutes to steady your heart rate. The 5-4-3-2-1 exercise is also effective—name 5 things you see, 4 you can touch, 3 you hear, 2 you smell, and 1 you taste. Light stretching or a short walk can release physical tension. If your mind is racing, jot down your worries in a notebook to externalize them, then set it aside for now.\n\n"
         "Building a routine can provide stability. Start with small, achievable tasks, like making your bed or drinking a glass of water, to create a sense of control. Mindfulness practices, like a 5-minute guided meditation (available on apps or online), can quiet your thoughts. Limit caffeine and screen time, as they can heighten anxiety. If anxiety feels persistent, consider speaking with a therapist, who can offer strategies like exposure therapy or mindfulness-based stress reduction. Connecting with a supportive friend can also ease your mind.\n\n"
-        "You are stronger than your worries, and every moment you face anxiety is proof of your resilience. Think of a time when you overcame a fear—you did it then, and you can do it now. Each small step you take, like trying a breathing exercise or reaching out for support, is a victory. You’re capable of finding peace, and your courage is inspiring others, even if you don’t realize it yet.\n\n"
+        "You are stronger than your worries, and every moment you face anxiety is proof of your resilience. Think of a time when you overcame a fear—you’ve done it then, and you can do it now. Each small step you take, like trying a breathing exercise or reaching out for support, is a victory. You’re capable of finding peace, and your courage is inspiring others, even if you don’t realize it yet.\n\n"
         "You’re on a journey to reclaim your calm, and I believe in your ability to navigate this storm. Keep going, because you have the strength to create a life where anxiety doesn’t hold you back. You’re not defined by your worries—you’re defined by your courage to keep moving forward. Let’s work through this together—use /chat to share more or get additional support."
     )
 }
@@ -203,7 +203,32 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data["prev_response"] = response
     context.user_data["awaiting_followup"] = False
     context.user_data["conversation_history"] = f"User selected mood: {mood} | Bot: {response} "
-    await query.message.reply_text(response)
+    # Create new keyboard for post-mood options
+    keyboard = [
+        [InlineKeyboardButton("Chat with CalmBot", callback_data="chat_after_mood"),
+         InlineKeyboardButton("Change Response", callback_data="change_response")]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    await query.message.reply_text(response, reply_markup=reply_markup)
+
+async def post_mood_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+    action = query.data
+    if action == "chat_after_mood":
+        context.user_data["chat_mode"] = True
+        context.user_data["awaiting_followup"] = False
+        await query.message.reply_text("Great, let’s dive deeper! What’s on your mind about how you’re feeling?")
+    elif action == "change_response":
+        keyboard = [
+            [InlineKeyboardButton("😊 Happy", callback_data="happiness"),
+             InlineKeyboardButton("😢 Sad", callback_data="sadness")],
+            [InlineKeyboardButton("😡 Angry", callback_data="anger"),
+             InlineKeyboardButton("😟 Anxious", callback_data="anxiety")]
+        ]
+        reply_markup = InlineKeyboardMarkup(keyboard)
+        context.user_data["awaiting_followup"] = False
+        await query.message.reply_text("No worries! How are you feeling now?", reply_markup=reply_markup)
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_message = update.message.text
@@ -250,7 +275,8 @@ def main():
     app = Application.builder().token(TELEGRAM_TOKEN).read_timeout(300).write_timeout(300).connect_timeout(300).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("chat", chat))
-    app.add_handler(CallbackQueryHandler(button))
+    app.add_handler(CallbackQueryHandler(button, pattern='^(happiness|sadness|anger|anxiety)$'))
+    app.add_handler(CallbackQueryHandler(post_mood_button, pattern='^(chat_after_mood|change_response)$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     app.run_polling()
 
