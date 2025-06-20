@@ -7,81 +7,292 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/addons/p5.sound.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #2a2a72, #7c3aed);
+            --accent-color: #2dd4bf;
+            --highlight-color: #facc15;
+            --text-dark: #1a1a3b;
+            --text-light: #f8fafc;
+            --bg-light: rgba(255, 255, 255, 0.95);
+            --shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background: linear-gradient(135deg, #a5b4fc, #e0e7ff, #c4b5fd);
-            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #c4b5fd, #e0e7ff);
+            font-family: 'Inter', sans-serif;
             min-height: 100vh;
+            color: var(--text-dark);
             transition: background 0.5s ease;
+            padding-top: 80px;
         }
-        .chat-bubble {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 16px;
-            margin: 12px 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .user-bubble {
-            background: linear-gradient(to right, #93c5fd, #60a5fa);
-            color: #1e3a8a;
-        }
-        .bot-bubble {
-            background: linear-gradient(to right, #fefcbf, #fef08a);
-            color: #713f12;
-        }
-        .emotion-btn {
-            background: linear-gradient(45deg, #e0e7ff, #c4b5fd);
-            border: 2px solid #a5b4fc;
-            border-radius: 12px;
-            padding: 16px;
-            font-weight: 600;
-            color: #1e3a8a;
-            transition: transform 0.3s ease-in, box-shadow 0.3s ease;
-        }
-        .emotion-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-        }
-        .action-btn {
-            background: linear-gradient(to right, #60a5fa, #3b82f6);
-            border: none;
-            border-radius: 12px;
-            padding: 12px 24px;
-            font-weight: 600;
-            color: white;
-            transition: transform 0.3s ease;
-        }
-        .action-btn:hover {
-            transform: scale(1.05);
-        }
-        .response-container {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-        .chat-section {
-            display: none;
-        }
-        .chat-section.visible {
-            display: block;
-        }
-        .return-btn {
+
+        header {
             position: fixed;
-            top: 20px;
-            left: 20px;
-            background: linear-gradient(to right, #60a5fa, #3b82f6);
-            color: white;
-            padding: 10px 20px;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 1rem 2rem;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(12px);
+        }
+
+        header .title-container {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 0.9rem;
+            font-weight: 300;
+            margin: 0;
+        }
+
+        .return-btn {
+            background: linear-gradient(to right, #fb7185, #e11d48);
+            color: var(--text-light);
+            padding: 8px 16px;
             border-radius: 8px;
             font-weight: 600;
-            z-index: 1000;
+            font-size: 0.9rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: none;
+            border: none;
+            cursor: pointer;
         }
+
+        .return-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
         .return-btn.visible {
             display: block;
         }
+
+        section {
+            padding: 2rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .emotion-container {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 2rem;
+            width: 800px;
+            max-width: 90%;
+            margin: 2rem auto;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .emotion-btn {
+            background: var(--bg-light);
+            border: 2px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(5px);
+            box-shadow: var(--shadow);
+        }
+
+        .emotion-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+            border-color: var(--highlight-color);
+        }
+
+        .action-btn {
+            background: linear-gradient(to right, var(--accent-color), #14b8a6);
+            color: var(--text-light);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .response-container {
+            background: var(--bg-light);
+            border: 2px solid transparent;
+            border-image: linear-gradient(to right, var(--accent-color), var(--highlight-color)) 1;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+            margin-top: 1.5rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .chat-section {
+            display: none;
+        }
+
+        .chat-section.visible {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 80px);
+            padding-top: 0;
+        }
+
+        .chat-section.visible h3 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -150%);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .chat-box {
+            background: var(--bg-light);
+            border-radius: 16px;
+            padding: 1.5rem;
+            height: 500px;
+            overflow-y: auto;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+            margin-bottom: 1rem;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .chat-bubble {
+            max-width: 70%;
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            margin: 0.75rem 1rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        .user-bubble {
+            background: linear-gradient(to right, var(--accent-color), #14b8a6);
+            color: var(--text-light);
+            margin-left: auto;
+            border-bottom-right-radius: 4px;
+        }
+
+        .bot-bubble {
+            background: #f1f5f9;
+            color: var(--text-dark);
+            margin-right: auto;
+            border-bottom-left-radius: 4px;
+        }
+
+        .typing-indicator {
+            max-width: 70%;
+            margin: 0.75rem 1rem;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            margin-right: 4px;
+            animation: typing 1s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .chat-input-container {
+            position: sticky;
+            bottom: 0;
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            backdrop-filter: blur(12px);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .chat-input {
+            flex-grow: 1;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .chat-input:focus {
+            border-color: var(--accent-color);
+        }
+
+        .send-btn {
+            background: var(--accent-color);
+            color: var(--text-light);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            margin-left: 0.5rem;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .send-btn:hover {
+            background: #14b8a6;
+            transform: translateY(-2px);
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -89,116 +300,149 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
             justify-content: center;
             align-items: center;
             z-index: 2000;
         }
+
+        .modal.visible {
+            display: flex;
+        }
+
         .modal-content {
-            background: linear-gradient(135deg, #ffffff, #e0e7ff);
+            background: var(--bg-light);
             border-radius: 16px;
-            padding: 24px;
+            padding: 2rem;
             max-width: 600px;
             width: 90%;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+            animation: fadeIn 0.5s ease-out;
         }
+
         .breathing-circle {
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle, #60a5fa, #3b82f6);
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, var(--accent-color), #14b8a6);
             border-radius: 50%;
             animation: breathe 8s ease-in-out infinite;
-            margin: 0 auto;
+            margin: 1rem auto;
         }
+
         .progress-box {
-            background: linear-gradient(135deg, #f3e8ff, #dbeafe);
+            background: var(--bg-light);
             border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-            border: 2px solid #a5b4fc;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
         }
+
         .progress-title {
-            font-size: 2rem;
-            font-weight: 600;
-            color: #1e3a8a;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
             text-align: center;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            max-width: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            margin-bottom: 1rem;
         }
+
         @keyframes breathe {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.5); }
+            50% { transform: scale(1.3); }
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            box-shadow: var(--shadow);
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
-    <button id="return-btn" class="return-btn" aria-label="Return to emotion selection">Back to Emotions</button>
-
-    <header class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white py-8 text-center">
-        <h1 class="text-5xl font-bold">CalmBot</h1>
-        <p class="mt-3 text-xl">Your AI companion for inner peace</p>
+    <header>
+        <div class="title-container">
+            <h1>CalmBot</h1>
+            <p>Your AI companion for inner peace</p>
+        </div>
+        <button id="return-btn" class="return-btn" aria-label="Return to emotion selection">Back to Emotions</button>
     </header>
 
-    <section id="hero-section" class="py-16 px-4 text-center">
-        <h2 class="text-4xl font-semibold text-indigo-800">Welcome to CalmBot</h2>
-        <p class="mt-6 max-w-2xl mx-auto text-lg text-gray-700">
+    <section id="hero-section" class="text-center">
+        <h2 class="text-3xl font-bold text-gray-800">Welcome to CalmBot</h2>
+        <p class="mt-4 max-w-2xl mx-auto text-gray-600">
             Explore your emotions and find calm. Choose how you’re feeling to start your journey.
         </p>
     </section>
 
-    <section id="emotion-section" class="py-12 px-4">
-        <h3 class="text-3xl font-semibold text-center text-indigo-800 mb-8">How Are You Feeling?</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            <button id="happiness" class="emotion-btn">😊 Happy</button>
-            <button id="sadness" class="emotion-btn">😢 Sad</button>
-            <button id="anger" class="emotion-btn">😡 Angry</button>
-            <button id="anxiety" class="emotion-btn">😟 Anxious</button>
+    <section id="emotion-section">
+        <div class="emotion-container">
+            <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">How Are You Feeling?</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <button id="happiness" class="emotion-btn">😊 Happy</button>
+                <button id="sadness" class="emotion-btn">😢 Sad</button>
+                <button id="anger" class="emotion-btn">😡 Angry</button>
+                <button id="anxiety" class="emotion-btn">😟 Anxious</button>
+            </div>
         </div>
-        <div id="response" class="mt-12 max-w-4xl mx-auto text-gray-800 response-container hidden"></div>
+        <div id="response" class="response-container hidden max-w-4xl mx-auto"></div>
     </section>
 
-    <section id="progress-section" class="py-12 px-4 max-w-4xl mx-auto hidden">
+    <section id="progress-section" class="max-w-4xl mx-auto hidden">
         <h3 class="progress-title">Your Emotional Journey</h3>
-        <div id="progress-content" class="progress-box mt-6">
+        <div id="progress-content" class="progress-box">
             <div id="progress-canvas" style="width: 100%; height: 200px;"></div>
-            <p id="progress-message" class="text-center text-gray-700 mt-4 italic"></p>
+            <p id="progress-message" class="text-center text-gray-600 mt-4 italic"></p>
         </div>
     </section>
 
-    <section id="chat-section" class="chat-section py-12 px-4 max-w-4xl mx-auto">
-        <h3 class="text-3xl font-semibold text-center text-indigo-800 mb-8">Talk to CalmBot</h3>
-        <div id="chat-box" class="h-96 overflow-y-auto p-6 border border-indigo-200 rounded-2xl bg-white/80"></div>
-        <div class="mt-6 flex">
-            <input id="chat-input" type="text" class="flex-grow p-4 border border-indigo-200 rounded-l-2xl focus:outline-none focus:ring-2 focus:ring-indigo-400" placeholder="Share your thoughts...">
-            <button id="send-btn" class="bg-indigo-600 text-white px-8 rounded-r-2xl hover:bg-indigo-700">Send</button>
+    <section id="chat-section" class="chat-section max-w-4xl mx-auto">
+        <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">Talk to CalmBot</h3>
+        <div id="chat-box" class="chat-box">
+        </div>
+        <div class="chat-input-container">
+            <input id="chat-input" type="text" class="chat-input" placeholder="Share your thoughts...">
+            <button id="send-btn" class="send-btn">Send</button>
         </div>
     </section>
 
-    <section id="resources-section" class="py-12 px-4 max-w-4xl mx-auto">
-        <h3 class="text-3xl font-semibold text-center text-indigo-800 mb-8">More Support</h3>
+    <section id="resources-section" class="max-w-4xl mx-auto">
+        <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">More Support</h3>
         <div class="response-container">
-            <p class="text-gray-800">Connect with mental health resources:</p>
-            <ul class="list-disc pl-6 mt-4">
-                <li><a href="https://www.betterhelp.com" class="text-indigo-600 hover:underline" target="_blank">BetterHelp</a></li>
-                <li><a href="https://www.psychologytoday.com" class="text-indigo-600 hover:underline" target="_blank">Psychology Today</a></li>
-                <li><a href="https://www.crisistextline.org" class="text-indigo-600 hover:underline" target="_blank">Crisis Text Line</a></li>
+            <p class="text-gray-600">Connect with mental health resources:</p>
+            <ul class="list-disc pl-6 mt-4 text-gray-600">
+                <li><a href="https://www.betterhelp.com" class="text-blue-600 hover:underline" target="_blank">BetterHelp</a></li>
+                <li><a href="https://www.psychologytoday.com" class="text-blue-600 hover:underline" target="_blank">Psychology Today</a></li>
+                <li><a href="https://www.crisistextline.org" class="text-blue-600 hover:underline" target="_blank">Crisis Text Line</a></li>
             </ul>
         </div>
     </section>
 
+    <div id="welcome-modal" class="modal visible">
+        <div class="modal-content">
+            <h3 class="text-xl font-bold text-gray-800">Welcome to CalmBot</h3>
+            <p class="text-gray-600 mt-2">
+                CalmBot is your AI companion for emotional well-being. Explore your feelings, journal your thoughts, practice calming breathing exercises, or nurture your Serenity Garden. Start by selecting an emotion to embark on your journey to inner peace.
+            </p>
+            <div class="flex justify-center mt-4">
+                <button id="close-welcome" class="action-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
     <div id="journal-modal" class="modal">
-        <div class="modal-content space-y-4">
-            <h3 class="text-2xl font-semibold text-indigo-800">Journal Your Thoughts</h3>
-            <p id="journal-prompt" class="text-gray-800"></p>
-            <textarea id="journal-input" class="w-full p-4 border border-indigo-200 rounded-lg" rows="5" placeholder="Write your thoughts..."></textarea>
-            <div class="flex justify-center gap-4">
+        <div class="modal-content">
+            <h3 class="text-xl font-bold text-gray-800">Journal Your Thoughts</h3>
+            <p id="journal-prompt" class="text-gray-600 mt-2"></p>
+            <textarea id="journal-input" class="w-full p-3 border border-gray-300 rounded-lg mt-4" rows="5" placeholder="Write your thoughts..."></textarea>
+            <div class="flex justify-center gap-4 mt-4">
                 <button id="save-journal" class="action-btn">Save</button>
                 <button id="close-journal" class="action-btn bg-gray-400 hover:bg-gray-500">Close</button>
             </div>
@@ -206,12 +450,12 @@
     </div>
 
     <div id="breathing-modal" class="modal">
-        <div class="modal-content space-y-4 p-6">
-            <h3 class="text-2xl font-semibold text-indigo-800">Breathing Exercise</h3>
-            <p class="text-gray-800">Inhale (4s), hold (4s), exhale (8s).</p>
-            <div class="breathing-circle mx-auto mb-6"></div>
+        <div class="modal-content">
+            <h3 class="text-xl font-bold text-gray-800">Breathing Exercise</h3>
+            <p class="text-gray-600 mt-2">Inhale (4s), hold (4s), exhale (8s).</p>
+            <div class="breathing-circle"></div>
             <audio id="breathing-audio" loop src="https://freesound.org/data/previews/262/262376_4760685-lq.mp3"></audio>
-            <div class="flex justify-center gap-4">
+            <div class="flex justify-center gap-4 mt-4">
                 <button id="play-breathing-audio" class="action-btn">Play</button>
                 <button id="pause-breathing-audio" class="action-btn bg-gray-400 hover:bg-gray-500">Pause</button>
                 <button id="close-breathing" class="action-btn bg-gray-400 hover:bg-gray-500">Close</button>
@@ -220,15 +464,15 @@
     </div>
 
     <div id="garden-modal" class="modal">
-        <div class="modal-content space-y-4 p-6">
-            <h3 class="text-2xl font-semibold text-indigo-800">Serenity Garden</h3>
-            <p class="text-gray-800">Click to plant flowers and create calm.</p>
-            <div id="garden-canvas" style="width: 100%; height: 300px; border: 2px solid #a5b4fc; border-radius: 8px;"></div>
+        <div class="modal-content">
+            <h3 class="text-xl font-bold text-gray-800">Serenity Garden</h3>
+            <p class="text-gray-600 mt-2">Click to plant flowers and create calm.</p>
+            <div id="garden-canvas" style="width: 100%; height: 300px; border: 2px solid #d1d5db; border-radius: 8px; margin-top: 1rem;"></div>
             <audio id="garden-audio">
-            <source src="/static/bird_sounds.mp3" type="audio/mp3">
-            <source src="/static/forest_sounds.mp3" type="audio/mp3">
+                <source src="/static/bird_sounds.mp3" type="audio/mp3">
+                <source src="/static/forest_sounds.mp3" type="audio/mp3">
             </audio>
-            <div class="flex justify-center gap-4">
+            <div class="flex justify-center gap-4 mt-4">
                 <button id="play-garden-audio" class="action-btn">Play</button>
                 <button id="pause-garden-audio" class="action-btn bg-gray-400 hover:bg-gray-500">Pause</button>
                 <button id="close-garden" class="action-btn bg-gray-400 hover:bg-gray-500">Close</button>
@@ -268,7 +512,6 @@
         };
 
         function initGarden() {
-            // Remove any existing p5.js canvas to prevent overlap
             const existingCanvas = document.querySelector('#garden-canvas canvas');
             if (existingCanvas) existingCanvas.remove();
             new p5(sketch => {
@@ -311,7 +554,6 @@
                     body: JSON.stringify({ user_id: userId })
                 });
                 const data = await res.json();
-                // Find the dominant emotion
                 let maxCount = Math.max(...data.counts);
                 let maxIndex = data.counts.indexOf(maxCount);
                 let dominantEmotion = data.emotions[maxIndex];
@@ -328,7 +570,6 @@
                     progressMessage += "\nAnxiety is leading your emotions right now. You're resilient—try a breathing exercise or chat to ease your mind.";
                 }
                 document.getElementById('progress-message').innerText = progressMessage;
-                // Remove any existing p5.js canvas to prevent overlap
                 const existingCanvas = document.querySelector('#progress-canvas canvas');
                 if (existingCanvas) existingCanvas.remove();
                 new p5(sketch => {
@@ -378,22 +619,27 @@
         const breathingModal = document.getElementById('breathing-modal');
         const gardenModal = document.getElementById('garden-modal');
         const breathingAudio = document.getElementById('breathing-audio');
+        const welcomeModal = document.getElementById('welcome-modal');
+        const chatBox = document.getElementById('chat-box');
+
+        document.getElementById('close-welcome').addEventListener('click', () => {
+            welcomeModal.classList.remove('visible');
+        });
 
         document.querySelectorAll('.emotion-btn').forEach(button => {
             button.addEventListener('click', async () => {
                 currentMood = button.id;
-                document.body.style.background = moodStyles[currentMood] || 'linear-gradient(135deg, #a5b4fc, #e0e7ff, #c4b5fd)';
-                responseDiv.innerHTML = '<p class="text-center text-indigo-600">Loading...</p>';
+                document.body.style.background = moodStyles[currentMood] || 'linear-gradient(135deg, #c4b5fd, #e0e7ff)';
+                responseDiv.innerHTML = '<p class="text-center text-blue-600">Loading...</p>';
                 responseDiv.classList.remove('hidden');
                 try {
-                    // Still log mood to server for progress tracking
                     await fetch(`/mood/${currentMood}`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ user_id: userId })
                     });
                     responseDiv.innerHTML = `
-                        <div class="text-lg leading-relaxed">${moodResponses[currentMood]}</div>
+                        <div class="text-base leading-relaxed text-gray-600">${moodResponses[currentMood]}</div>
                         <div class="flex justify-center gap-4 mt-6 flex-wrap">
                             <button id="journal-btn" class="action-btn">Journal</button>
                             <button id="breathing-btn" class="action-btn">Breathing</button>
@@ -403,14 +649,14 @@
                     `;
                     document.getElementById('journal-btn').addEventListener('click', () => {
                         journalPrompt.textContent = journalPrompts[currentMood] || "How are you feeling?";
-                        journalModal.style.display = 'flex';
+                        journalModal.classList.add('visible');
                     });
                     document.getElementById('breathing-btn').addEventListener('click', () => {
-                        breathingModal.style.display = 'flex';
+                        breathingModal.classList.add('visible');
                         breathingAudio.play();
                     });
                     document.getElementById('garden-btn').addEventListener('click', () => {
-                        gardenModal.style.display = 'flex';
+                        gardenModal.classList.add('visible');
                         initGarden();
                         document.getElementById('garden-audio').load();
                         playGardenAudio();
@@ -439,36 +685,41 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ user_id: userId, entry })
                     });
-                    journalModal.style.display = 'none';
+                    journalModal.classList.remove('visible');
                     journalInput.value = '';
                 } catch (error) {
                     console.error('Error:', error);
                 }
             }
         });
+
         document.getElementById('close-journal').addEventListener('click', () => {
-            journalModal.style.display = 'none';
+            journalModal.classList.remove('visible');
         });
 
         document.getElementById('play-breathing-audio').addEventListener('click', () => {
             breathingAudio.play();
         });
+
         document.getElementById('pause-breathing-audio').addEventListener('click', () => {
             breathingAudio.pause();
         });
+
         document.getElementById('close-breathing').addEventListener('click', () => {
-            breathingModal.style.display = 'none';
+            breathingModal.classList.remove('visible');
             breathingAudio.pause();
         });
 
         document.getElementById('play-garden-audio').addEventListener('click', () => {
             playGardenAudio();
         });
+
         document.getElementById('pause-garden-audio').addEventListener('click', () => {
             document.getElementById('garden-audio').pause();
         });
+
         document.getElementById('close-garden').addEventListener('click', () => {
-            gardenModal.style.display = 'none';
+            gardenModal.classList.remove('visible');
             document.getElementById('garden-audio').pause();
         });
 
@@ -478,10 +729,9 @@
             returnBtn.classList.remove('visible');
             progressSection.classList.add('hidden');
             responseDiv.classList.add('hidden');
-            document.body.style.background = 'linear-gradient(135deg, #a5b4fc, #e0e7ff, #c4b5fd)';
+            document.body.style.background = 'linear-gradient(135deg, #c4b5fd, #e0e7ff)';
         });
 
-        const chatBox = document.getElementById('chat-box');
         const chatInput = document.getElementById('chat-input');
         const sendBtn = document.getElementById('send-btn');
 
@@ -494,19 +744,27 @@
             chatBox.appendChild(userBubble);
             chatBox.scrollTop = chatBox.scrollHeight;
             chatInput.value = '';
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'typing-indicator';
+            typingIndicator.innerHTML = '<span></span><span></span><span></span>';
+            chatBox.appendChild(typingIndicator);
+            chatBox.scrollTop = chatBox.scrollHeight;
             try {
+                await new Promise(resolve => setTimeout(resolve, 2000 + Math.random() * 1000));
                 const res = await fetch('/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ message, user_id: userId })
                 });
                 const data = await res.json();
+                chatBox.removeChild(typingIndicator);
                 const botBubble = document.createElement('div');
                 botBubble.className = 'chat-bubble bot-bubble';
                 botBubble.textContent = data.response;
                 chatBox.appendChild(botBubble);
                 chatBox.scrollTop = chatBox.scrollHeight;
             } catch (error) {
+                chatBox.removeChild(typingIndicator);
                 console.error('Error:', error);
             }
         }
