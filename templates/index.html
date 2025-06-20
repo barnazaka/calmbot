@@ -311,7 +311,23 @@
                     body: JSON.stringify({ user_id: userId })
                 });
                 const data = await res.json();
-                document.getElementById('progress-message').innerText = `${data.summary}\nYou're making beautiful progress on your emotional journey!`;
+                // Find the dominant emotion
+                let maxCount = Math.max(...data.counts);
+                let maxIndex = data.counts.indexOf(maxCount);
+                let dominantEmotion = data.emotions[maxIndex];
+                let totalMoods = data.counts.reduce((a, b) => a + b, 0);
+                let progressMessage = `You've logged ${totalMoods} moods: `;
+                progressMessage += data.emotions.map((emotion, index) => `${emotion} (${data.counts[index]})`).join(", ") + ".";
+                if (dominantEmotion === 'happiness') {
+                    progressMessage += "\nYou're making beautiful progress with happiness leading your journey! Keep nurturing those joyful moments.";
+                } else if (dominantEmotion === 'sadness') {
+                    progressMessage += "\nSadness has been prominent lately. You're so brave for facing it—try journaling or chatting to find some peace.";
+                } else if (dominantEmotion === 'anger') {
+                    progressMessage += "\nAnger is standing out in your journey. Your strength is inspiring—consider breathing exercises or chatting to channel it.";
+                } else if (dominantEmotion === 'anxiety') {
+                    progressMessage += "\nAnxiety is leading your emotions right now. You're resilient—try a breathing exercise or chat to ease your mind.";
+                }
+                document.getElementById('progress-message').innerText = progressMessage;
                 // Remove any existing p5.js canvas to prevent overlap
                 const existingCanvas = document.querySelector('#progress-canvas canvas');
                 if (existingCanvas) existingCanvas.remove();
