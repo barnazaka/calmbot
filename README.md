@@ -11,7 +11,7 @@ Whether you're feeling happy, sad, angry, or anxious, CalmBot offers empathetic 
 
 The **Peace with Oneself** challenge calls for solutions to help individuals heal from emotional distress and unresolved trauma, which often originate in childhood and are exacerbated by external chaos. CalmBot addresses this by:
 
-- **Acknowledging Trauma:** Recognizes potential wounds (e.g., neglect, betrayal) with empathy, validating users’ emotions.
+- **Acknowledging Trauma:** Recognises potential wounds (e.g., neglect, betrayal) with empathy, validating users’ emotions.
 - **Empowering Healing:** Offers actionable steps like journaling, breathing exercises, and mindfulness to process pain.
 - **Building Resilience:** Motivates users to break cycles of avoidance and find strength in their journey.
 - **Creating Calm:** Provides tools like the Serenity Garden and chat support to anchor users in peace.
@@ -214,6 +214,7 @@ Passionate about mental health, AI, and empowering healing journeys.
 * **Google Gemini:** For powering empathetic responses.
 * **Freesound.org:** For CC0 calming sounds.
 * **Open Source Community:** Flask, p5.js, and more.
+
 
 
 
