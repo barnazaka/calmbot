@@ -1,4 +1,4 @@
-# CalmBot: Your Companion for Inner Peace 🌱 000000000000000000000000000000000000000000000000000000
+# CalmBot: Your Companion for Inner Peace 🌱 00000000000000000000000000000000000000000000000000000
 
 
 **CalmBot** is an AI-powered emotional support platform designed to help users heal from unresolved trauma and find peace amid life’s chaos. CalmBot helps individuals recognise, monitor, and begin to mend deep emotional wounds that often trace back to childhood pain or societal neglect.
